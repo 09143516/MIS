@@ -23,4 +23,4 @@
 ##数据查询图2：
 ![数据查询](https://github.com/09143516/MIS/blob/master/images/3.JPG)
 ##数据查询图3：
-![数据查询](https://github.com/09143516/MIS/blob/master/images/4.JPG）
+![数据查询](https://github.com/09143516/MIS/blob/master/images/4.JPG））
