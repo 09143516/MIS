@@ -1,7 +1,7 @@
 ﻿#设备管理系统用例模型
 
 ##一、模型用例图：
- ![用例图](1.jpg)
+ ![用例图](https://github.com/09143516/MIS/blob/master/1.JPG)
 
 
 
