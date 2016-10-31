@@ -32,7 +32,7 @@
     AND
      cp.PrivilegeOperation = 'Permit' AND cp.PrivilegeAccess = 'Sys_Menu';
 ###查看页面截图
-![结果图](https://github.com/09143516/MIS/blob/master/images/7.JPG)
+![结果图](https://github.com/09143516/MIS/blob/master/images/7.PNG)
 
 ##SQL2
 
@@ -54,4 +54,4 @@
     AND
      cp.PrivilegeOperation = 'Permit' AND cp.PrivilegeAccess = 'Sys_Button' AND sm.MenuName = '订单';
 ###权限截图
-![结果图](https://github.com/09143516/MIS/blob/master/images/8.JPG)
+![结果图](https://github.com/09143516/MIS/blob/master/images/8.PNG)
