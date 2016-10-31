@@ -15,26 +15,43 @@
 
 ##SQL1
 
->selecct distinct m.MenuID,m.MenuNo,m.MenuOrder,m.Name,m.MenuUrl from
->Sys_Menu m,
->CF_User r
->where
->r.LoginName='test1'
+>SELECT cp.PrivilegeMaster,
+    cp.PrivilegeMasterKey,
+    cp.PrivilegeAccess,
+    cp.PrivilegeAccessKey,
+    sm.MenuName 
+ FROM CF_Privilege AS cp
+  LEFT JOIN Sys_menu AS sm ON cp.PrivilegeAccessKey = sm.MenuID AND cp.PrivilegeAccess = 'Sys_Menu'
+ WHERE ((cp.PrivilegeMaster = 'CF_Role'
+     AND cp.PrivilegeMasterKey
+     IN (SELECT RoleID FROM CF_UserRole AS cur
+       LEFT JOIN CF_User AS cu ON cur.UserID = cu.UserID WHERE cu.LoginName='test1' ))
+    OR
+     (cp.PrivilegeMaster = 'CF_User'
+     AND cp.PrivilegeMasterKey = (SELECT UserID FROM cf_user WHERE LoginName = 'test1')))
+    AND
+     cp.PrivilegeOperation = 'Permit' AND cp.PrivilegeAccess = 'Sys_Menu';
 ###查看页面截图
-![查看页面截图](https://github.com/09143516/MIS/blob/master/images/7.JPG)
-![结果图](https://github.com/09143516/MIS/blob/master/images/8.JPG)
+![结果图](https://github.com/09143516/MIS/blob/master/images/7.JPG)
 
 ##SQL2
 
->selecct distinct u.loginname,r.roleid,r.roledesc,b.btnid,b.btnname,b.btnno from
->Sys_Button b,
->CF_User u,
->CF_Role r,
->CF_UserRole ur
->where
->r.LoginName='test1'
->and ur.UserID=u.UserID
->and r.RoleID=ur.RoleID
+>SELECT cp.PrivilegeMaster，
+    cp.PrivilegeMasterKey ,
+    cp.PrivilegeAccess ,
+    cp.PrivilegeAccessKey ,
+    sb.BtnName 
+ FROM cf_privilege AS cp
+  LEFT JOIN Sys_Button AS sb ON cp.PrivilegeAccessKey = sb.BtnID AND cp.PrivilegeAccess = 'Sys_Button'
+  LEFT JOIN Sys_Menu AS sm ON sb.MenuNo = sm.MenuNo
+ WHERE ((cp.PrivilegeMaster = 'CF_Role'
+     AND cp.PrivilegeMasterKey
+     IN (SELECT RoleID FROM CF_UserRole AS cur
+       LEFT JOIN CF_User AS cu ON cur.UserID = cu.UserID WHERE cu.LoginName='test1' ))
+    OR
+     (cp.PrivilegeMaster = 'CF_User'
+     AND cp.PrivilegeMasterKey = (SELECT UserID FROM CF_User WHERE LoginName = 'test1')))
+    AND
+     cp.PrivilegeOperation = 'Permit' AND cp.PrivilegeAccess = 'Sys_Button' AND sm.MenuName = '订单';
 ###权限截图
-![权限截图](https://github.com/09143516/MIS/blob/master/images/9.JPG)
-![结果图](https://github.com/09143516/MIS/blob/master/images/10.JPG)
+![结果图](https://github.com/09143516/MIS/blob/master/images/8.JPG)
